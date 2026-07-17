@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 스플래시 배경: 앱 브랜드 다크 색상 (#12131A) -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#12131A" />
+        </shape>
+    </item>
+</layer-list>

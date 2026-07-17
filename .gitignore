@@ -1,0 +1,28 @@
+# ═══════════════════════════════════════════════════════════════════
+# 보안: 서명 키/비밀 파일은 절대 커밋 금지
+# ═══════════════════════════════════════════════════════════════════
+*.jks
+*.keystore
+key.properties
+*.p12
+*.p8
+*.mobileprovision
+service-account*.json
+google-services.json
+GoogleService-Info.plist
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# 도구 캐시
+.codegraph/
+.omo/
+__pycache__/
+*.pyc

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://leeeo.github.io/color-rush/sitemap.xml
