@@ -13,3 +13,7 @@ storePassword=키스토어_비밀번호
 keyPassword=키_비밀번호
 keyAlias=upload
 storeFile=../upload-keystore.jks
+
+# 대안: 비밀번호를 저장소 밖 파일에 두려면 위 두 비밀번호 줄을 빼고 아래 줄을 쓴다.
+# 그 파일에는 STORE_PASSWORD=..., KEY_PASSWORD=... 두 줄이 있어야 한다.
+# signingEnvFile=C:/Users/<사용자>/.secrets/color-rush-signing.env

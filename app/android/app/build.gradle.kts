@@ -19,6 +19,14 @@ val keystoreProperties = Properties()
 val keystorePropertiesFile = rootProject.file("key.properties")
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+    // Optional: keep passwords outside the repo in a KEY=VALUE file (STORE_PASSWORD, KEY_PASSWORD).
+    (keystoreProperties["signingEnvFile"] as String?)?.let { envPath ->
+        val env = Properties()
+        FileInputStream(file(envPath)).use { env.load(it) }
+        mapOf("storePassword" to "STORE_PASSWORD", "keyPassword" to "KEY_PASSWORD").forEach { (prop, key) ->
+            env.getProperty(key)?.let { keystoreProperties.putIfAbsent(prop, it) }
+        }
+    }
 }
 
 android {
