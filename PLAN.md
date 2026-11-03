@@ -13,8 +13,9 @@
 | 게임/광고/IAP 코드 | ✅ 완료 (analyze 0건, 테스트 9/9) |
 | Android 빌드 파이프라인 | ✅ 검증됨 (릴리즈 APK 45.9MB / AAB 43.6MB 실빌드 성공) |
 | iOS 설정 | ✅ 파일 준비 완료 (빌드는 macOS/CI 필요) |
-| 웹사이트 | ✅ 제작 완료 (배포 전, TODO 교체 필요) |
-| CI/CD 워크플로 | ✅ 작성 완료 (GitHub push 후 활성화) |
+| 웹사이트 | ✅ 배포 완료 — https://leeeo.github.io/color-rush/privacy.html (2026-09-14 확인) |
+| CI/CD 워크플로 | ✅ GitHub push 완료 (github.com/leeeo/color-rush, Pages 활성) |
+| 스토어 등록정보/그래픽 | ✅ 준비 완료 — [store/](store/) (문안 ko·en, 아이콘 512, 피처 1024x500, 스크린샷 4컷×ko·en) |
 | 실기기 플레이 확인 | ⬜ 미완 (Phase 1) |
 | 계정/실제 ID/스토어 등록 | ⬜ 미완 (Phase 2~7) |
 
@@ -30,7 +31,7 @@
 
 ## Phase 2 — 계정 준비 (1~2일, 승인 대기 포함) → [docs/00](docs/00-시작하기.md) 4장
 
-- [ ] GitHub 계정 (무료)
+- [x] GitHub 계정 (무료)
 - [ ] Google Play Console 개발자 등록 ($25, 1회) + 신원 확인
 - [ ] AdMob 계정 생성 (무료)
 - [ ] (iOS 출시 시) Apple Developer Program ($99/년)
@@ -39,11 +40,11 @@
 
 ⚠️ **스토어 제출보다 먼저** 해야 합니다. 개인정보처리방침 URL이 심사 제출 필수값입니다.
 
-- [ ] `website/` 안의 `<!-- TODO -->` 전부 교체 (이메일, 개발자명, 날짜)
-- [ ] GitHub 저장소 생성 → `git add . && git commit && git push`
-- [ ] 저장소 Settings > Pages > Source = **GitHub Actions** 설정
-- [ ] 배포 확인: `https://<아이디>.github.io/<저장소>/privacy.html` 열림
-- [ ] 이 URL을 메모 (Phase 6/7에서 사용)
+- [x] `website/` 안의 `<!-- TODO -->` 전부 교체 (이메일, 개발자명, 날짜) — 남은 TODO는 스토어 링크(출시 후)·분석 스크립트(선택)뿐
+- [x] GitHub 저장소 생성 → `git add . && git commit && git push`
+- [x] 저장소 Settings > Pages > Source = **GitHub Actions** 설정
+- [x] 배포 확인: `https://<아이디>.github.io/<저장소>/privacy.html` 열림
+- [x] 이 URL을 메모 (Phase 6/7에서 사용) → `https://leeeo.github.io/color-rush/privacy.html`
 
 ## Phase 4 — AdMob 실제 ID 발급/교체 (약 1시간 + 승인 대기) → [docs/04](docs/04-AdMob-설정.md)
 
@@ -67,7 +68,7 @@
 - [ ] `flutter build appbundle --release` → AAB 생성 확인
 - [ ] Play Console 앱 생성 → 설정 마법사(광고 있음, 콘텐츠 등급, 타겟 13세+, 데이터 보안 양식)
 - [ ] 개인정보처리방침 URL 입력 (Phase 3의 URL)
-- [ ] 스토어 등록정보(설명/아이콘 512px/그래픽 1024x500/스크린샷 2장+)
+- [ ] 스토어 등록정보 입력 — 문안·아이콘 512px·피처 그래픽 1024x500·스크린샷 4컷(1080x1920, ko·en) 모두 [store/](store/)에 준비됨 (실기기 확보 시 `scripts/capture-store-screenshots.py` 대신 실기기 캡처로 교체 권장)
 - [ ] 내부 테스트 트랙 업로드 → 직접 설치 확인 → IAP 실테스트
 - [ ] ⚠️ 신규 개인 계정 비공개 테스트 요건(테스터/기간) 해당 여부 확인
 - [ ] 프로덕션 제출 → 심사 통과
@@ -77,7 +78,7 @@
 - [ ] 경로 선택: Mac 보유(로컬 Xcode) / **Mac 없음 → Codemagic 권장** (월 500분 무료)
 - [ ] 번들 ID `com.leeeo.colorrush` 등록 → App Store Connect 앱 생성
 - [ ] App Privacy 설문 (광고 ID 수집=예, 추적=예 — ATT 구현됨)
-- [ ] 스크린샷 준비 → TestFlight 내부 테스트 → IAP 동반 제출 → 심사
+- [ ] 스크린샷 준비 (6.7인치 1290x2796은 `store/assets/screenshots/ios67-*.png`에 준비됨) → TestFlight 내부 테스트 → IAP 동반 제출 → 심사
 
 ## Phase 8 — 릴리즈 자동화 활성화 (약 1시간) → [docs/09](docs/09-CI-CD-자동화.md)
 
