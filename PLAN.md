@@ -63,9 +63,9 @@
 
 ## Phase 6 — Android 출시 (반나절 + 심사 수일) → [docs/06](docs/06-안드로이드-출시.md)
 
-- [ ] keytool로 업로드 키스토어 생성 + **안전한 곳에 백업** (분실 = 업데이트 불가)
-- [ ] `app/android/key.properties.example` → `key.properties` 복사 후 값 입력
-- [ ] `flutter build appbundle --release` → AAB 생성 확인
+- [x] keytool로 업로드 키스토어 생성 (2026-11-04, `%USERPROFILE%\.secrets\color-rush-upload.jks`, 비밀번호는 같은 폴더 `color-rush-signing.env`) — Bitwarden 반영(`leeeo-bw/run.ps1`)은 대표 실행 대기
+- [x] `app/android/key.properties` 작성 (`signingEnvFile`로 외부 비밀번호 파일을 읽음)
+- [x] `flutter build appbundle --release` → 서명 AAB 43.6MB (2026-11-04, 업로드 인증서 SHA-256 `03:D4:96:92:DD:DB:9D:D8:FE:06:BC:0F:35:EE:E1:E7:73:68:CB:95:90:E3:A5:EF:B7:D6:CE:3C:D9:AC:0D:AA`)
 - [ ] Play Console 앱 생성 → 설정 마법사(광고 있음, 콘텐츠 등급, 타겟 13세+, 데이터 보안 양식)
 - [ ] 개인정보처리방침 URL 입력 (Phase 3의 URL)
 - [ ] 스토어 등록정보 입력 — 문안·아이콘 512px·피처 그래픽 1024x500·스크린샷 4컷(1080x1920, ko·en) 모두 [store/](store/)에 준비됨 (실기기 확보 시 `scripts/capture-store-screenshots.py` 대신 실기기 캡처로 교체 권장)
