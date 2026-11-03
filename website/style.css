@@ -13,7 +13,7 @@
   --color-border: #2c2e3a;
   --color-text: #f1f2f6;
   --color-text-muted: #9a9cb0;
-  --color-text-faint: #6c6e82;
+  --color-text-faint: #8b8da3; /* AA on --color-bg and --color-surface */
 
   /* Game colors */
   --color-red: #ff4757;
@@ -36,8 +36,8 @@
     "Segoe UI", Roboto, system-ui, sans-serif;
 
   --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
+  --text-sm: 0.9375rem; /* 15px: smallest readable secondary text */
+  --text-base: 1.0625rem; /* 17px body */
   --text-lg: 1.125rem;
   --text-xl: 1.375rem;
   --text-2xl: 1.75rem;
@@ -98,6 +98,8 @@ body {
   font-family: var(--font-kr);
   font-size: var(--text-base);
   line-height: 1.6;
+  word-break: keep-all; /* Korean: wrap between words, not inside them */
+  overflow-wrap: break-word;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -265,6 +267,8 @@ section {
 
 .brand-mark {
   display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   gap: 0.02em;
   font-size: var(--text-xl);
   font-weight: 800;
@@ -296,6 +300,11 @@ section {
 }
 
 .site-nav__links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
   font-size: var(--text-sm);
   font-weight: 600;
   color: var(--color-text-muted);
@@ -314,6 +323,7 @@ section {
   color: #0a1420;
   font-weight: 700;
   font-size: var(--text-sm);
+  min-height: 44px;
   padding: var(--space-2) var(--space-5);
   border-radius: var(--radius-full);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
@@ -336,6 +346,7 @@ section {
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
+  min-height: 48px;
   padding: var(--space-3) var(--space-6);
   border-radius: var(--radius-full);
   font-weight: 700;
@@ -704,6 +715,7 @@ section {
 
 .store-badge {
   display: inline-flex;
+  text-align: left;
   align-items: center;
   gap: var(--space-3);
   background: #101119;
@@ -714,9 +726,10 @@ section {
   transition: transform var(--transition-fast), border-color var(--transition-fast);
 }
 
-.store-badge:hover {
-  transform: translateY(-2px);
-  border-color: var(--color-text-muted);
+.store-badge__status {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
 }
 
 .store-badge__text {
@@ -725,7 +738,7 @@ section {
 
 .store-badge__small {
   display: block;
-  font-size: 11px;
+  font-size: var(--text-sm);
   color: var(--color-text-faint);
 }
 
@@ -761,6 +774,9 @@ section {
 }
 
 .site-footer__links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   transition: color var(--transition-fast);
 }
 
@@ -770,7 +786,7 @@ section {
 
 .site-footer__note {
   margin-top: var(--space-6);
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   color: var(--color-text-faint);
   line-height: 1.7;
 }
@@ -806,7 +822,7 @@ section {
 
 .lang-block__tag {
   display: inline-block;
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   font-weight: 700;
   letter-spacing: 0.08em;
   padding: var(--space-1) var(--space-3);
@@ -888,6 +904,10 @@ section {
 }
 
 .toc a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  min-width: 44px;
   color: var(--color-text-muted);
 }
 
