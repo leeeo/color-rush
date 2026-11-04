@@ -50,6 +50,8 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        // AdMob 앱 ID: 기본은 Google 공식 테스트 앱 ID, release만 실제 ID (아래 buildTypes)
+        manifestPlaceholders["admobAppId"] = "ca-app-pub-3940256099942544~3347511713"
     }
 
     signingConfigs {
@@ -63,6 +65,7 @@ android {
 
     buildTypes {
         release {
+            manifestPlaceholders["admobAppId"] = "ca-app-pub-9901401078434900~7873330472"
             signingConfig = if (keystorePropertiesFile.exists()) {
                 signingConfigs.getByName("release")
             } else {

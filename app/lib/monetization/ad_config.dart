@@ -9,7 +9,7 @@ import 'package:flutter/foundation.dart';
 ///  교체해야 실제 수익이 발생합니다. (형식: ca-app-pub-숫자16자리/숫자10자리)
 ///
 ///  안전장치:
-///  - 디버그 빌드는 항상 Google 공식 테스트 광고를 사용합니다.
+///  - 릴리즈가 아닌 빌드(debug·profile)는 항상 Google 공식 테스트 광고를 사용합니다.
 ///  - `_real...` 값이 아직 placeholder(X 포함)면 릴리즈에서도 테스트 광고로
 ///    폴백하여 계정 정지(자기 클릭/무효 트래픽) 위험을 차단합니다.
 ///
@@ -18,17 +18,17 @@ import 'package:flutter/foundation.dart';
 ///    있습니다. 그것도 함께 교체해야 합니다.
 /// ══════════════════════════════════════════════════════════════════════
 abstract final class AdConfig {
-  // ── 실제 ID (TODO: 교체) ──────────────────────────────────────────────
+  // ── 실제 ID (Android: AdMob 앱 Color Rush, 2026-11-04 발급 / iOS: 미발급) ──
   static const String _realBannerAndroid =
-      'ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX';
+      'ca-app-pub-9901401078434900/1826621861';
   static const String _realBannerIos =
       'ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX';
   static const String _realInterstitialAndroid =
-      'ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX';
+      'ca-app-pub-9901401078434900/8360415639';
   static const String _realInterstitialIos =
       'ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX';
   static const String _realRewardedAndroid =
-      'ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX';
+      'ca-app-pub-9901401078434900/3108088955';
   static const String _realRewardedIos =
       'ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX';
 
@@ -51,7 +51,7 @@ abstract final class AdConfig {
 
   static String _pick({required String real, required String test}) {
     final notConfigured = real.contains('XXXX');
-    return (kDebugMode || notConfigured) ? test : real;
+    return (!kReleaseMode || notConfigured) ? test : real;
   }
 
   static String get bannerUnitId => _isAndroid

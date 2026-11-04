@@ -9,15 +9,11 @@
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
-        <!-- ═══════════════════════════════════════════════════════════
-             ★ AdMob 앱 ID - 출시 전 반드시 교체! (docs/04-AdMob-설정.md)
-             아래는 Google 공식 "테스트" 앱 ID입니다.
-             AdMob 콘솔 > 앱 > 앱 설정에서 발급받은 실제 ID로 교체하세요.
-             형식: ca-app-pub-1234567890123456~1234567890 (물결표 ~ 포함)
-             ═══════════════════════════════════════════════════════════ -->
+        <!-- AdMob 앱 ID는 build.gradle.kts의 manifestPlaceholders["admobAppId"]에서 온다.
+             release = 실제 앱 ID, 그 밖의 빌드 = Google 공식 테스트 앱 ID (docs/04-AdMob-설정.md) -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
+            android:value="${admobAppId}"/>
 
         <activity
             android:name=".MainActivity"
