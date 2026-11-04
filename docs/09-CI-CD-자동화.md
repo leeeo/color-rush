@@ -36,7 +36,7 @@ Android 릴리즈 빌드는 서명 키 정보를 GitHub Secrets에서 읽어옵�
 `KEYSTORE_BASE64` 값은 PowerShell로 다음과 같이 만들어서 클립보드에 바로 복사할 수 있습니다.
 
 ```powershell
-[Convert]::ToBase64String([IO.File]::ReadAllBytes("D:\Projects\leeeo-fable\app\android\upload-keystore.jks")) | Set-Clipboard
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("D:\Projects\leeeo-colorrush\app\android\upload-keystore.jks")) | Set-Clipboard
 ```
 
 이후 GitHub Secrets 입력창에 `Ctrl+V`로 붙여넣으면 됩니다. (키스토어 파일이 아직 없다면 06번 문서에서 먼저 생성하세요.)
@@ -56,7 +56,7 @@ version: 1.0.0+1
 2. 변경사항을 커밋합니다.
 
 ```powershell
-cd D:\Projects\leeeo-fable
+cd D:\Projects\leeeo-colorrush
 git add app\pubspec.yaml
 git commit -m "chore: bump version to 1.0.1+2"
 ```

@@ -14,7 +14,7 @@
 Android SDK가 설치되지 않았거나 Flutter가 SDK 경로를 못 찾는 상태입니다. 프로젝트 루트에서 설치 스크립트를 다시 실행하세요.
 
 ```powershell
-cd D:\Projects\leeeo-fable
+cd D:\Projects\leeeo-colorrush
 powershell -ExecutionPolicy Bypass -File scripts\setup-android.ps1
 ```
 
@@ -51,7 +51,7 @@ flutter doctor --android-licenses
 캐시가 꼬였을 가능성이 높습니다. 다음 순서로 시도하세요.
 
 ```powershell
-cd D:\Projects\leeeo-fable\app
+cd D:\Projects\leeeo-colorrush\app
 flutter clean
 flutter pub get
 flutter run
