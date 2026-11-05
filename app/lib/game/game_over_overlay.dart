@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../core/app_colors.dart';
 import '../core/strings.dart';
+import '../monetization/ad_config.dart';
 
 /// Dimmed panel shown over the game when a run ends.
 class GameOverOverlay extends StatelessWidget {
@@ -69,7 +70,7 @@ class GameOverOverlay extends StatelessWidget {
                     const TextStyle(color: AppColors.textDim, fontSize: 14),
               ),
               const SizedBox(height: 24),
-              if (canContinue) ...[
+              if (AdConfig.adsEnabled && canContinue) ...[
                 FilledButton.icon(
                   onPressed: onContinue,
                   icon: const Icon(Icons.play_circle_outline),

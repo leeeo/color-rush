@@ -18,6 +18,10 @@ import 'package:flutter/foundation.dart';
 ///    있습니다. 그것도 함께 교체해야 합니다.
 /// ══════════════════════════════════════════════════════════════════════
 abstract final class AdConfig {
+  /// Disable monetization only for test builds with --dart-define=ADS_ENABLED=false.
+  static const bool adsEnabled =
+      bool.fromEnvironment('ADS_ENABLED', defaultValue: true);
+
   // ── 실제 ID (Android: AdMob 앱 Color Rush, 2026-11-04 발급 / iOS: 미발급) ──
   static const String _realBannerAndroid =
       'ca-app-pub-9901401078434900/1826621861';

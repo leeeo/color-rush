@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'core/app_colors.dart';
 import 'core/prefs.dart';
+import 'monetization/ad_config.dart';
 import 'monetization/ads_manager.dart';
 import 'monetization/iap_manager.dart';
 import 'screens/home_screen.dart';
@@ -13,12 +14,15 @@ import 'screens/home_screen.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   await Prefs.init();
   runApp(const ColorRushApp());
   // Ads (UMP consent + ATT + SDK) and IAP init happen after the first frame
   // so a slow network never blocks app startup. Both never throw.
-  unawaited(AdsManager.instance.init());
-  unawaited(IapManager.instance.init());
+  if (AdConfig.adsEnabled) {
+    unawaited(AdsManager.instance.init());
+    unawaited(IapManager.instance.init());
+  }
 }
 
 class ColorRushApp extends StatelessWidget {
@@ -48,6 +52,15 @@ class ColorRushApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [Locale('en'), Locale('ko')],
+      builder: (context, child) => AnnotatedRegion<SystemUiOverlayStyle>(
+        // Let Android draw edge-to-edge bars; only control icon contrast.
+        value: const SystemUiOverlayStyle(
+          statusBarIconBrightness: Brightness.light,
+          statusBarBrightness: Brightness.dark,
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
+        child: child!,
+      ),
       home: const HomeScreen(),
     );
   }

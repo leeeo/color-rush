@@ -35,19 +35,20 @@ class AdsManager extends ChangeNotifier {
       (defaultTargetPlatform == TargetPlatform.android ||
           defaultTargetPlatform == TargetPlatform.iOS);
 
-  bool get initialized => _initialized;
+  bool get initialized => AdConfig.adsEnabled && _initialized;
 
-  bool get showBanner => _initialized && !Prefs.adsRemoved;
+  bool get showBanner => initialized && !Prefs.adsRemoved;
 
-  bool get isRewardedReady => _initialized && _rewarded != null;
+  bool get isRewardedReady => initialized && _rewarded != null;
 
   /// GDPR: whether we must expose a "privacy options" entry point (EEA users
   /// who saw the consent form can change their choice at any time).
-  bool get privacyOptionsRequired => _privacyOptionsRequired;
+  bool get privacyOptionsRequired =>
+      AdConfig.adsEnabled && _privacyOptionsRequired;
 
   /// Call once after the first frame. Never throws.
   Future<void> init() async {
-    if (!adsSupported || _initStarted) return;
+    if (!AdConfig.adsEnabled || !adsSupported || _initStarted) return;
     _initStarted = true;
     try {
       if (defaultTargetPlatform == TargetPlatform.iOS) {
@@ -74,6 +75,7 @@ class AdsManager extends ChangeNotifier {
 
   /// Opens the UMP privacy options form (GDPR re-consent).
   void showPrivacyOptionsForm() {
+    if (!AdConfig.adsEnabled) return;
     ConsentForm.showPrivacyOptionsForm((FormError? error) {
       if (error != null) {
         debugPrint('Privacy options error: ${error.errorCode} ${error.message}');
@@ -113,7 +115,7 @@ class AdsManager extends ChangeNotifier {
   // ── Interstitial ─────────────────────────────────────────────────────
 
   void _loadInterstitial() {
-    if (!_initialized || Prefs.adsRemoved) return;
+    if (!initialized || Prefs.adsRemoved) return;
     InterstitialAd.load(
       adUnitId: AdConfig.interstitialUnitId,
       request: const AdRequest(),
@@ -132,7 +134,7 @@ class AdsManager extends ChangeNotifier {
   /// Shows an interstitial when leaving game over, if policy allows.
   /// Completes after the ad is dismissed (or immediately when skipped).
   Future<void> maybeShowInterstitialOnGameExit() async {
-    if (!_initialized || Prefs.adsRemoved) return;
+    if (!initialized || Prefs.adsRemoved) return;
     if (Prefs.gameOverCount % AdConfig.interstitialEveryNGameOvers != 0) {
       return;
     }
@@ -168,7 +170,7 @@ class AdsManager extends ChangeNotifier {
   // ── Rewarded (continue) ──────────────────────────────────────────────
 
   void _loadRewarded() {
-    if (!_initialized) return;
+    if (!initialized) return;
     RewardedAd.load(
       adUnitId: AdConfig.rewardedUnitId,
       request: const AdRequest(),
@@ -192,7 +194,7 @@ class AdsManager extends ChangeNotifier {
   /// resumes underneath a fullscreen ad.
   Future<bool> showRewarded({required VoidCallback onReward}) async {
     final ad = _rewarded;
-    if (!_initialized || ad == null) return false;
+    if (!initialized || ad == null) return false;
     _rewarded = null;
     notifyListeners();
     var earned = false;

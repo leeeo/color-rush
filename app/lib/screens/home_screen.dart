@@ -7,6 +7,7 @@ import '../core/haptics.dart';
 import '../core/prefs.dart';
 import '../core/strings.dart';
 import '../game/game_screen.dart';
+import '../monetization/ad_config.dart';
 import '../monetization/ads_manager.dart';
 import '../monetization/iap_manager.dart';
 import '../widgets/banner_ad_widget.dart';
@@ -142,10 +143,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
-              _PurchaseRow(s: s),
+              if (AdConfig.adsEnabled) ...[
+                const SizedBox(height: 20),
+                _PurchaseRow(s: s),
+              ],
               const Spacer(),
-              const BannerAdWidget(),
+              if (AdConfig.adsEnabled) const BannerAdWidget(),
             ],
           ),
         ),

@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 import '../core/prefs.dart';
+import 'ad_config.dart';
 import 'ads_manager.dart';
 
 enum IapMessage { purchased, failed }
@@ -38,7 +39,8 @@ class IapManager extends ChangeNotifier {
   /// Localized price straight from the store, e.g. "₩2,500".
   String? get priceLabel => _product?.price;
 
-  bool get canBuy => _available && _product != null && !Prefs.adsRemoved;
+  bool get canBuy =>
+      AdConfig.adsEnabled && _available && _product != null && !Prefs.adsRemoved;
 
   bool get _platformSupported =>
       !kIsWeb &&
@@ -47,7 +49,7 @@ class IapManager extends ChangeNotifier {
 
   /// Call once after the first frame. Never throws.
   Future<void> init() async {
-    if (!_platformSupported) return;
+    if (!AdConfig.adsEnabled || !_platformSupported) return;
     try {
       _available = await InAppPurchase.instance.isAvailable();
       if (!_available) {
@@ -94,7 +96,7 @@ class IapManager extends ChangeNotifier {
   }
 
   Future<void> restorePurchases() async {
-    if (!_available) return;
+    if (!AdConfig.adsEnabled || !_available) return;
     try {
       await InAppPurchase.instance.restorePurchases();
     } catch (e) {
