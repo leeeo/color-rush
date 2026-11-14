@@ -10,6 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_platform_interface/in_app_purchase_platform_interface.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -57,6 +58,26 @@ class _Store extends InAppPurchasePlatform {
 }
 
 void main() {
+  test('UMP debug EEA geography applies only to non-release builds', () {
+    final eea = ConsentRequestParameters(
+      consentDebugSettings: ConsentDebugSettings(
+        debugGeography: DebugGeography.debugGeographyEea,
+      ),
+    );
+    expect(
+      AdsManager.consentRequestParameters(debugEea: true, releaseMode: false),
+      eea,
+    );
+    expect(
+      AdsManager.consentRequestParameters(debugEea: true, releaseMode: true),
+      ConsentRequestParameters(),
+    );
+    expect(
+      AdsManager.consentRequestParameters(debugEea: false, releaseMode: false),
+      ConsentRequestParameters(),
+    );
+  });
+
   testWidgets('compile-time flag gates SDK entry points and monetization UI',
       (tester) async {
     expect(AdConfig.adsEnabled,

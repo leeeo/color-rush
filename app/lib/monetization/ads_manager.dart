@@ -83,12 +83,28 @@ class AdsManager extends ChangeNotifier {
     });
   }
 
+  /// UMP request parameters. `--dart-define=UMP_DEBUG_EEA=true` forces the
+  /// EEA geography so the GDPR form can be checked from outside the EEA;
+  /// release builds ignore the flag.
+  @visibleForTesting
+  static ConsentRequestParameters consentRequestParameters({
+    bool debugEea = const bool.fromEnvironment('UMP_DEBUG_EEA'),
+    bool releaseMode = kReleaseMode,
+  }) {
+    if (releaseMode || !debugEea) return ConsentRequestParameters();
+    return ConsentRequestParameters(
+      consentDebugSettings: ConsentDebugSettings(
+        debugGeography: DebugGeography.debugGeographyEea,
+      ),
+    );
+  }
+
   /// GDPR/EEA consent via Google UMP. Outside the EEA this is a no-op that
   /// completes immediately. Errors never block the game.
   Future<void> _gatherUmpConsent() async {
     final done = Completer<void>();
     ConsentInformation.instance.requestConsentInfoUpdate(
-      ConsentRequestParameters(),
+      consentRequestParameters(),
       () {
         ConsentForm.loadAndShowConsentFormIfRequired((FormError? error) {
           if (error != null) {
