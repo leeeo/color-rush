@@ -74,7 +74,7 @@ class S {
     noMatch: '불일치',
     gameOver: '게임 오버',
     newBest: '신기록!',
-    continueWithAd: '광고 보고 이어하기',
+    continueWithAd: '광고 보고 계속하기',
     retry: '다시하기',
     home: '홈으로',
     removeAds: '광고 제거',
